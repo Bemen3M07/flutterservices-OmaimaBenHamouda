@@ -36,7 +36,7 @@ class _JokeScreenState extends State<JokeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Random Jokes')),
+      appBar: AppBar(title: const Text('Random Jokes - Omaima Ben Hamouda')),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
