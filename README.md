@@ -65,6 +65,113 @@ Aplicación Flutter para obtener datos de coches desde una API externa. Implemen
   ```xml
   <uses-permission android:name="android.permission.INTERNET" />
 
+
+# Exercici 2
+
+## Introducción
+Este informe detalla la implementación de una aplicación Flutter que gestiona y muestra una lista de coches obtenidos a través de un servicio HTTP. Se utiliza el paquete `provider` para la gestión del estado de la aplicación.
+
+## Librerías Utilizadas
+- `flutter/foundation.dart`: Proporciona herramientas esenciales para la gestión del estado en Flutter.
+- `flutter/material.dart`: Biblioteca principal para el diseño de interfaces en Flutter.
+- `provider.dart`: Facilita la implementación del patrón Provider para la gestión del estado.
+- `carHttpService.dart`: Manejador de peticiones HTTP para obtener datos de coches.
+- `car.dart`: Modelo de datos para representar los coches.
+
+## Estructura del Código
+
+### CarProvider (Gestor del Estado)
+Ubicado en `carProvider.dart`, esta clase gestiona la lista de coches y su estado.
+
+#### Atributos:
+- `_carService`: Instancia de `CarHttpService` para obtener los datos de coches.
+- `_cars`: Lista de coches obtenidos del servicio.
+- `_isLoading`: Indica si los datos están siendo cargados.
+- `_error`: Almacena mensajes de error en caso de fallo.
+
+#### Métodos:
+- `fetchCars()`: Obtiene la lista de coches desde el servicio HTTP y actualiza el estado de la aplicación.
+
+### MyApp (Interfaz de Usuario)
+Ubicado en `main.dart`, esta clase configura la aplicación Flutter y define la interfaz.
+
+#### Componentes Principales:
+- `ChangeNotifierProvider`: Proporciona `CarProvider` a la aplicación.
+- `MaterialApp`: Contenedor principal de la aplicación.
+- `Scaffold`: Estructura básica de la UI con `AppBar` y `ListView`.
+- `Consumer<CarProvider>`: Detecta cambios en `CarProvider` y actualiza la UI según corresponda.
+- `FloatingActionButton`: Botón para refrescar la lista de coches.
+
+## Funcionamiento de la Aplicación
+1. Al iniciar, `CarProvider` se inicializa y está disponible globalmente.
+2. La UI muestra un `CircularProgressIndicator` mientras se cargan los datos.
+3. Si ocurre un error, se muestra un mensaje en pantalla.
+4. Si los datos se cargan correctamente, se muestra una lista de coches.
+5. El usuario puede actualizar la lista mediante el `FloatingActionButton`.
+
+## Conclusión
+La implementación hace uso efectivo del patrón Provider para gestionar el estado y actualizar la interfaz de usuario de forma reactiva. Además, el uso de servicios HTTP permite obtener datos dinámicos, haciendo que la aplicación sea más flexible y escalable.
+
+
+
+# Exercici 2
+
+
+## Librerías Utilizadas
+- `flutter/foundation.dart`: Proporciona herramientas esenciales para la gestión del estado en Flutter.
+- `flutter/material.dart`: Biblioteca principal para el diseño de interfaces en Flutter.
+- `provider.dart`: Facilita la implementación del patrón Provider para la gestión del estado.
+- `carHttpService.dart`: Manejador de peticiones HTTP para obtener datos de coches.
+- `car.dart`: Modelo de datos para representar los coches.
+
+## Estructura del Código
+
+### CarProvider (Gestor del Estado)
+Ubicado en `carProvider.dart`, esta clase gestiona la lista de coches y su estado.
+
+#### Atributos:
+- `_carService`: Instancia de `CarHttpService` para obtener los datos de coches.
+- `_cars`: Lista de coches obtenidos del servicio.
+- `_isLoading`: Indica si los datos están siendo cargados.
+- `_error`: Almacena mensajes de error en caso de fallo.
+
+#### Métodos:
+- `fetchCars()`: Obtiene la lista de coches desde el servicio HTTP y actualiza el estado de la aplicación.
+
+### MyApp (Interfaz de Usuario)
+Ubicado en `main.dart`, esta clase configura la aplicación Flutter y define la interfaz.
+
+#### Componentes Principales:
+- `ChangeNotifierProvider`: Proporciona `CarProvider` a la aplicación.
+- `MaterialApp`: Contenedor principal de la aplicación.
+- `Scaffold`: Estructura básica de la UI con `AppBar` y `ListView`.
+- `Consumer<CarProvider>`: Detecta cambios en `CarProvider` y actualiza la UI según corresponda.
+- `FloatingActionButton`: Botón para refrescar la lista de coches.
+
+## Funcionamiento de la Aplicación
+1. Al iniciar, `CarProvider` se inicializa y está disponible globalmente.
+2. La UI muestra un `CircularProgressIndicator` mientras se cargan los datos.
+3. Si ocurre un error, se muestra un mensaje en pantalla.
+4. Si los datos se cargan correctamente, se muestra una lista de coches.
+5. El usuario puede actualizar la lista mediante el `FloatingActionButton`.
+
+## Conclusión
+La implementación hace uso efectivo del patrón Provider para gestionar el estado y actualizar la interfaz de usuario de forma reactiva. Además, el uso de servicios HTTP permite obtener datos dinámicos, haciendo que la aplicación sea más flexible y escalable.
+
+![alt text](image-8.png)
+
+##  Qué és el que aprendrem a aquest vídeo? 
+Aprendrem a gestionar un estat global de l'aplicació utilitzant el paquet Provider. Això permet compartir dades (com un comptador) entre diferents parts de l'aplicació de forma eficient i reactiva.
+## Quina comanda es fa servir al vídeo per a crear una nova aplicació flutter?
+La comanda utilitzada és: flutter create nova_applicacio
+## Com es treu el debuguer banner? Afegeix la línia de codi que fan servir al vídeo per treure’l
+Es desactiva afegint la propietat debugShowCheckedModeBanner: false al MaterialApp:
+MaterialApp(
+  debugShowCheckedModeBanner: false, // Elimina la banner de debug
+  // ... Altres configuracions
+)
+
+
 # Exercici 4: Acudits
 
 ## Descripció
@@ -230,5 +337,10 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 ![alt text](image-6.png)
+
 ```
+
+
+
