@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   http: ^0.13.6  
   provider: ^6.0.5 
+  google_fonts: ^3.0.1 
+
 
 
 dev_dependencies:

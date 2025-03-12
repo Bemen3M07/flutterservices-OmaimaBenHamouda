@@ -116,6 +116,16 @@ La implementación hace uso efectivo del patrón Provider para gestionar el esta
 
 # Exercici 2
 
+##  Qué és el que aprendrem a aquest vídeo? 
+Aprendrem a gestionar un estat global de l'aplicació utilitzant el paquet Provider. Això permet compartir dades (com un comptador) entre diferents parts de l'aplicació de forma eficient i reactiva.
+## Quina comanda es fa servir al vídeo per a crear una nova aplicació flutter?
+La comanda utilitzada és: flutter create nova_applicacio
+## Com es treu el debuguer banner? Afegeix la línia de codi que fan servir al vídeo per treure’l
+Es desactiva afegint la propietat debugShowCheckedModeBanner: false al MaterialApp:
+MaterialApp(
+  debugShowCheckedModeBanner: false, // Elimina la banner de debug
+  // ... Altres configuracions
+)
 
 ## Librerías Utilizadas
 - `flutter/foundation.dart`: Proporciona herramientas esenciales para la gestión del estado en Flutter.
@@ -158,18 +168,84 @@ Ubicado en `main.dart`, esta clase configura la aplicación Flutter y define la 
 ## Conclusión
 La implementación hace uso efectivo del patrón Provider para gestionar el estado y actualizar la interfaz de usuario de forma reactiva. Además, el uso de servicios HTTP permite obtener datos dinámicos, haciendo que la aplicación sea más flexible y escalable.
 
+
 ![alt text](image-8.png)
 
-##  Qué és el que aprendrem a aquest vídeo? 
-Aprendrem a gestionar un estat global de l'aplicació utilitzant el paquet Provider. Això permet compartir dades (com un comptador) entre diferents parts de l'aplicació de forma eficient i reactiva.
-## Quina comanda es fa servir al vídeo per a crear una nova aplicació flutter?
-La comanda utilitzada és: flutter create nova_applicacio
-## Com es treu el debuguer banner? Afegeix la línia de codi que fan servir al vídeo per treure’l
-Es desactiva afegint la propietat debugShowCheckedModeBanner: false al MaterialApp:
-MaterialApp(
-  debugShowCheckedModeBanner: false, // Elimina la banner de debug
-  // ... Altres configuracions
+# Exericici 3
+
+## Objetivo
+Desarrollar una aplicación Flutter que consume datos de una API REST ([Car Data API](https://rapidapi.com/principalapis/api/car-data/)) utilizando el patrón Provider para la gestión del estado, siguiendo las mejores prácticas de arquitectura limpia.
+
+---
+
+## Estructura del Proyecto
+
+### Gestión de Estado (carProvider.dart)
+Implementación del patrón Provider con ChangeNotifier:
+
+dart
+Copy
+class CarProvider with ChangeNotifier {
+  List<Car> _cars = [];
+  bool _isLoading = false;
+  String _error = '';
+
+  Future<void> getCarsData() async {
+    _isLoading = true;
+    notifyListeners();
+    
+    try {
+      _cars = await CarHttpService().getCars();
+      _error = '';
+    } catch (e) {
+      _error = "Error: ${e.toString()}";
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+}
+###  Interfaz de Usuario (main.dart)
+Diseño Mejorado:
+
+SliverAppBar con efecto de scroll
+
+Tarjetas personalizadas con bordes redondeados
+
+Sistema de carga y manejo de errores visual
+
+Botón flotante de actualización
+
+dart
+Copy
+SliverList(
+  delegate: SliverChildBuilderDelegate(
+    (context, index) => Card(
+      margin: EdgeInsets.all(8),
+      child: ListTile(
+        leading: Icon(Icons.directions_car),
+        title: Text('${car.year} ${car.make}'),
+        subtitle: Text(car.type),
+      ),
+    ),
+  ),
 )
+Componente	Detalle
+Diseño Visual	Degradados, sombras, iconos temáticos, tipografía consistente
+Experiencia UX	Pull-to-refresh, feedback visual de carga, reintento automático en errores
+Performance	Paginación implícita con limit=10, caché de resultados
+Mantenibilidad	Separación clara de capas (modelo-vista-controlador)
+Ejecución de la Aplicación
+Agregar API Key válida de RapidAPI en car_service.dart
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^0.13.5        # Para llamadas HTTP
+  provider: ^6.0.5     # Gestión de estado
+  google_fonts: ^3.0.1 # Fuentes personalizadas (opcional)
+
+![alt text](image-9.png)
 
 
 # Exercici 4: Acudits
